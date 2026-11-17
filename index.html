@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>财经杂志｜文章页 AI 原型</title>
+<style>
+:root{--ink:#222321;--muted:#65655f;--line:#eae7e0;--accent:#a74620;--tint:#fbf5ee;--serif:"Noto Serif CJK SC","Songti SC","SimSun",serif}
+*{box-sizing:border-box}body{margin:0;background:#eeece8;color:var(--ink);font:15px/1.6 system-ui,"Microsoft YaHei",sans-serif}button,summary,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:var(--accent);text-underline-offset:4px}button:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.shell{max-width:540px;margin:auto;background:#fff;min-height:100vh;box-shadow:0 0 45px #33231113}.top{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 21px}.top a{text-decoration:none;color:var(--ink);font-size:26px}.top span{font-weight:650;letter-spacing:.16em}.top small{color:var(--muted)}main{padding:23px 24px 108px}h1{font:700 clamp(27px,6.7vw,39px)/1.29 var(--serif);margin:0 0 21px;overflow-wrap:anywhere}.audio{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:8px;background:#f4f4f3;color:var(--ink);text-align:left;padding:12px}.audio b{display:grid;place-items:center;background:#f46c35;color:white;border-radius:50%;width:39px;height:39px;flex:none}.meta{color:var(--muted);font-size:13px;margin:12px 0 18px}.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 15px}.jump a{font-size:13px;border:1px solid #eaded2;border-radius:18px;padding:5px 11px;text-decoration:none;background:#fffaf5}.ai{background:var(--tint);border:1px solid #ebdbcb;border-radius:10px;padding:0 14px;margin:0 0 23px}.ai summary{padding:12px 0;cursor:pointer;font-weight:700}.ai summary span{color:var(--accent);margin-right:6px}.ai ul{margin:0 0 9px;padding-left:19px}.ai li{margin:5px 0}.ai footer{font-size:12px;margin:10px 0 13px;color:var(--muted)}.prose{font:19px/1.96 var(--serif)}.prose p{margin:0 0 15px}.prose h2{font-size:20px;margin:24px 0 8px}.term{background:none;border:0;border-bottom:1px dashed var(--accent);padding:0;color:var(--accent);font:inherit}.terms{display:flex;flex-wrap:wrap;gap:8px}.terms button{font-size:13px;padding:4px 11px;background:white;border:1px solid #dfc7b4;border-radius:16px;color:var(--accent)}section{scroll-margin-top:70px}.related{margin-top:24px;border-top:1px solid var(--line);padding-top:13px}.related h2{margin:0;font:700 23px/1.4 var(--serif)}.related>p,.note{font-size:13px;color:var(--muted)}.card{border:1px solid var(--line);padding:13px 14px;border-radius:9px;margin-top:11px}.card summary{cursor:pointer;list-style:none}.card summary::-webkit-details-marker{display:none}.card summary::after{content:"展开摘要 ＋";display:block;font-size:12px;color:var(--accent);margin-top:6px}.card[open] summary::after{content:"收起摘要 −"}.card strong,.card small{display:block}.card small{color:var(--muted);margin-bottom:4px}.card p{margin:9px 0;font-size:14px}.bottom{position:fixed;z-index:2;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,540px);padding:10px 20px max(10px,env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;gap:8px;background:#fff}.bottom a,.bottom button{flex:1;text-align:center;border:0;border-radius:22px;background:#f3f2ef;color:var(--ink);text-decoration:none;padding:8px;font-size:14px}.bottom a:first-child{flex:1.5;background:var(--tint);color:var(--accent)}dialog{width:min(calc(100% - 24px),508px);max-height:80vh;border:1px solid var(--line);border-radius:16px;padding:20px 23px;margin:auto auto 12px;color:var(--ink)}dialog::backdrop{background:#17130e69}dialog h2{font:700 26px var(--serif);margin:5px 0 14px}dialog header{display:flex;justify-content:space-between;align-items:center;color:var(--accent);font-weight:700}dialog button{border:0;background:#f2efeb;border-radius:20px;padding:3px 10px}dialog p{margin:0 0 13px}.status{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);z-index:4;background:#292723;color:white;border-radius:18px;padding:5px 12px;font-size:12px;white-space:nowrap}.status:empty{display:none}
+[hidden]{display:none!important}.shell{position:relative}.mast{display:flex;align-items:center;gap:13px;padding:18px 16px 12px}.mast b,.ticker b{color:#105392;font-size:23px;font-weight:900;white-space:nowrap}.mast span{flex:1;background:#f1f1f1;border-radius:32px;padding:8px 14px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mast i{font:24px sans-serif}.channels,.subnav{display:flex;justify-content:space-between;gap:10px;padding:8px 15px 12px;font:16px/1.4 var(--serif);overflow:auto;white-space:nowrap}.channels b{color:#c52328}.banner{position:relative;overflow:hidden;display:grid;align-content:center;min-height:190px;margin:0 15px 13px;padding:20px 16px;border:9px solid #b53024;border-radius:10px;background:linear-gradient(115deg,#fff0c9,#f6d99b);color:#a5251d}.banner small{font-weight:850;color:#164e75}.banner strong{font-size:clamp(34px,9vw,48px);line-height:1.2}.banner span{font-size:12px;margin-top:5px}.books{position:absolute;right:7%;top:22%;width:21%;height:61%;transform:rotate(9deg);background:#fff8e9;box-shadow:-10px 7px #c44034,9px 8px #e8cfaa,0 4px 8px #0005;border:3px solid white;text-align:center;padding-top:18px;color:#163e65;font:bold 16px var(--serif)}.ticker,.hot{margin:11px 15px;border:1px solid #eee;border-radius:8px;padding:9px;box-shadow:0 1px 4px #00000008;font-size:13px}.ticker b{font-size:17px}.hot{display:grid;grid-template-columns:1fr 1fr;gap:9px 5px}.hot span::before{content:"热";background:#f47329;color:white;border-radius:4px;padding:1px 3px;margin-right:5px;font-size:11px}.story{display:grid;grid-template-columns:26% 1fr;gap:11px;padding:14px 15px;border-bottom:1px solid #eee;text-decoration:none;color:var(--ink)}.story strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:700 17px/1.45 var(--serif)}.thumb{aspect-ratio:4/3;background:#e6edf3;border-radius:5px;display:grid;place-content:center;text-align:center;color:#fff;font-weight:bold}.paper{color:#214c82;background:repeating-linear-gradient(#fff 0 12px,#e9eef4 12px 14px);border:1px solid #dce5ee}.paper small{font-size:9px}.brick{background:linear-gradient(135deg,#743f37,#bd8270)}.tower{background:linear-gradient(135deg,#4e708e,#22384d)}.tags{margin-top:4px;color:#666;font-size:12px}.ai-link{color:#155cb2;font-size:12px;margin-top:4px}.tabs{position:fixed;z-index:3;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,540px);background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 0 max(11px,env(safe-area-inset-bottom))}.tabs a{display:grid;justify-items:center;color:#676767;text-decoration:none;font-size:12px;line-height:1.5}.tabs i{font:25px/1.2 system-ui;font-style:normal}.tabs a[aria-current]{color:#0667cb;font-weight:700}#home,.panel{min-height:100dvh;padding-bottom:78px}.panel h2{text-align:center;font:700 21px var(--serif);padding:16px 0;margin:0}.panel h3{font-family:var(--serif)}.mag{display:grid;align-content:center;gap:8px;min-height:260px;text-align:center;margin:10px auto;width:58%;background:linear-gradient(155deg,#17304f,#557286);color:white;box-shadow:0 5px 18px #0003}.mag b{font-size:54px}.mag span{font-size:23px}.panel>h3{margin:20px 16px 8px}.issues,.filters{display:flex;gap:8px;padding:10px}.issues div{flex:1;background:#eee6db;padding:16px;text-align:center}.range,.filters>*{background:#f3f3f3;border-radius:5px;padding:8px;text-align:center}.filters>*{flex:1;font-size:12px}.filters b{background:#0865c6;color:white}.timeline{display:grid;grid-template-columns:43px 1fr;gap:10px;margin:0 12px}.timeline time{border:1px solid #98b9dd;text-align:center;color:#216caa;height:max-content}.timeline p{margin:0 0 9px;padding:11px;background:#fcf4eb;border-left:4px solid #ed9337;border-radius:5px;font-family:var(--serif)}.timeline p:first-child{background:#efebff;border-color:#8d67e7}.subnav{padding:20px 42px;font-size:18px}.subnav b{border-bottom:2px solid #0865c6}.feature,.video-card{margin:0 14px 12px;border-radius:8px;min-height:170px;display:grid;align-content:end;padding:16px;background:linear-gradient(145deg,#61798b,#26344a);color:#fff;font:700 22px/1.4 var(--serif)}.account{padding:12px 17px;border-bottom:1px solid #eee}.account h3{margin:7px 0}.video-card span{justify-self:center;margin-bottom:18px}.video-card small{font-size:13px}.aqua{background:linear-gradient(145deg,#b5d3cb,#23645c)}.grey{background:#4d5359}
+#magazine{color:#f6f8fa;background:radial-gradient(ellipse at 90% 64%,#65605770,transparent 42%),radial-gradient(ellipse at 0% 57%,#7c747350,transparent 47%),linear-gradient(155deg,#22242c,#0b283d 36%,#273846 68%,#222b31);min-height:100dvh}.mag-nav{display:grid;grid-template-columns:1.25fr 1fr 1fr 1.25fr;padding:clamp(24px,6vh,64px) 24px 0;align-items:center;text-align:center;font:18px var(--serif)}.mag-nav a,.mag-nav button{padding:8px 0;color:#e3e8ec;text-decoration:none;background:none;border:0;font:inherit}.mag-nav a:first-child{text-align:left}.mag-nav .subscription{text-align:right;color:#ff976d}.mag-nav button[aria-current]{color:#fff}.editions{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:clamp(30px,10vh,108px) 0 0}.editions::-webkit-scrollbar{display:none}.edition{min-width:100%;scroll-snap-align:center;text-align:center;font-family:var(--serif);padding:0 0 4px}.cover{position:relative;display:grid;place-items:center;width:min(62%,320px);aspect-ratio:0.77;margin:0 auto 24px;border:7px solid #fff;background:linear-gradient(156deg,#104178,#76baea 45%,#103653);box-shadow:0 8px 24px #0005;overflow:hidden}.cover img{position:absolute;width:100%;height:100%;object-fit:contain;background:#fff}.cover span{font-size:23px;font-weight:700}.edition h2{margin:0 0 8px;padding:0;font-size:25px}.edition p{margin:8px 0;color:#e2e7ea}.read-issue{display:block;width:69%;margin:22px auto 0;padding:10px;color:#172700;background:#a9d900;font-size:17px;text-decoration:none}.edition-controls{display:flex;justify-content:center;gap:8px;margin:12px 0}.edition-controls button{padding:0;border:0;width:20px;height:16px;background:transparent}.edition-controls button::after{content:"";display:block;margin:auto;width:6px;height:6px;background:#95a2ad;border-radius:50%}.edition-controls button[aria-pressed="true"]::after{background:#d4fa65}
+.tabs button{display:grid;justify-items:center;background:none;border:0;padding:0;color:#999;font:12px/1.5 system-ui;cursor:default}.tabs button i{color:#999}.story:active{background:#f4f8fc}.interest{display:flex;align-items:center;justify-content:space-between;gap:8px}.interest label{font-weight:650}.interest select{font:inherit;max-width:65%;color:var(--ink);background:#fff;border:1px solid #dfc7b4;border-radius:6px;padding:5px}.impact-result{border-top:1px solid #ebdbcb;padding-top:4px}.impact-result p{margin:8px 0}.impact-result b{color:var(--accent)}
+.summary-heading{padding:12px 0 2px;font-weight:700}.summary-heading span{color:var(--accent);margin-right:6px}.summary-core{margin:0 0 10px;font-weight:650}.summary-points{border-top:1px solid #ebdbcb}.summary-points>summary{list-style:none;color:var(--accent);padding:9px 0}.summary-points>summary::-webkit-details-marker{display:none}.summary-points>summary::after{content:" ＋"}.summary-points[open]>summary::after{content:" −"}
+.impact-entry{display:block;width:100%;margin:24px 0 0;padding:15px 16px;border:1px solid #ebdbcb;border-radius:10px;background:var(--tint);color:var(--ink);text-align:left}.impact-entry:hover{border-color:#d9bba1}.impact-entry h2{margin:0 0 3px;font:700 22px/1.4 var(--serif)}.impact-entry .impact-guide{display:block;color:var(--muted);font-size:13px}.impact-entry .impact-preview{display:block;margin:10px 0;padding-top:9px;border-top:1px solid #ebdbcb;font-size:14px}.impact-entry .impact-action{display:block;color:var(--accent);font-weight:700;font-size:13px}
+.related-entry{border:1px solid var(--line);border-radius:10px;padding:15px 16px}.related-entry h2{font-size:22px}.related-entry p{margin:5px 0;color:var(--muted)}.related-entry small{display:block;color:var(--muted);margin:9px 0}.related-entry button{border:0;background:none;color:var(--accent);padding:0;font-weight:700}
+#assistant{width:min(100%,540px);height:min(84dvh,760px);max-height:none;border:0;border-radius:18px 18px 0 0;padding:0;margin:auto auto 0;overflow:hidden;background:#fff}#assistant::backdrop{background:#17130e80}#assistant .sheet{height:100%;display:grid;grid-template-rows:auto auto 1fr;background:#fff}#assistant .sheet-head{display:block;color:inherit;font-weight:inherit;padding:11px 18px 12px;border-bottom:1px solid var(--line)}#assistant .sheet-handle{display:block;width:38px;height:4px;border-radius:3px;background:#d7d4cf;margin:0 auto 9px}#assistant .sheet-title{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}#assistant .sheet-title button{background:none;padding:2px 5px;color:var(--muted)}#assistant .sheet-title div{min-width:0}#assistant .sheet-title b{display:block;color:var(--accent)}#assistant .sheet-title small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}#assistant-back{display:none}#assistant-close{font-size:0;line-height:1}#assistant-close::before{content:"×";font-size:24px}.assistant-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}.assistant-tabs button{border:0;border-radius:18px;background:#f3f2ef;padding:7px 4px;color:var(--muted)}.assistant-tabs button[aria-selected="true"]{background:var(--tint);color:var(--accent);font-weight:700}.assistant-body{overflow:auto;padding:15px 18px calc(18px + env(safe-area-inset-bottom));overscroll-behavior:contain}.assistant-panel h3{font:700 21px/1.35 var(--serif);margin:0 0 5px}.demo-note{margin:0 0 12px;color:var(--muted);font-size:12px}.suggestions{display:grid;gap:7px;margin:10px 0 14px}.suggestions button{border:1px solid #eaded2;border-radius:9px;background:#fffaf5;text-align:left;padding:9px 11px;color:var(--ink)}.chat{display:grid;gap:10px;margin-bottom:12px}.bubble{border-radius:10px;padding:10px 12px;margin:0}.bubble.user{margin-left:16%;background:#f1f1ef}.bubble.answer{background:var(--tint);border:1px solid #ebdbcb}.bubble.answer h4{margin:0 0 4px;color:var(--accent)}.bubble.answer p{margin:4px 0}.evidence{margin-top:9px!important;padding-top:8px;border-top:1px solid #ebdbcb;font-size:12px;color:var(--muted)}.ask-form{position:sticky;bottom:0;display:grid;grid-template-columns:1fr auto;gap:7px;background:#fff;padding:8px 0 0}.ask-form input{min-width:0;border:1px solid #d8d4cd;border-radius:20px;padding:9px 13px;font:inherit}.ask-form button{border:0;border-radius:20px;background:var(--accent);color:#fff;padding:8px 15px}.assistant-related .card{background:#fff}.assistant-related>h2{font:700 21px/1.35 var(--serif);margin:0}.assistant-related>p{font-size:13px;color:var(--muted)}.assistant-impact .ai{margin-top:12px}.assistant-impact .interest{margin:2px 0 9px}.sheet-open{overflow:hidden}@media(max-height:560px){#assistant{height:94dvh}} 
+</style>
+<div class="shell" id="top"><div id="home">
+<header class="mast"><b>财经</b><span>⌕　“禁止有罪推定”拟入法</span><i>◎</i></header>
+<div class="channels"> <b>头条</b> <span>原创</span><span>金融</span><span>e财经</span><span>汽车</span><span>房地产</span><span>公司</span></div>
+<div class="banner"><small>财经 CAIJING</small><strong>财经双11</strong><b>买一赠一 · 年度钜惠</b><span>10.30–11.20</span><div class="books" aria-hidden="true">财经<br>封面故事</div></div>
+<div class="ticker"><b>财经</b>　【胜宏科技：拟回购公司股份】</div>
+<div class="hot"><span>美联储会连续加息吗</span><span>抗癌神药 医保报销</span><span>“禁止有罪推定”拟入法</span><span>进博会九年之变</span></div>
+<a class="story main-story" href="#reading"><div class="thumb paper"><b>工信部</b><small>政策解读</small></div><div><strong>工信部相关负责人就《关于推动汽车企业规范供应商账款支付 优化账期管理的通知》答记者问</strong><div class="tags">产业观察　·　新能源汽车</div><div class="ai-link">AI 摘要 · 名词解读 ›</div></div></a>
+<a class="story" href="#xiongan"><div class="thumb brick">企业</div><div><strong>专家解读雄安发展的“民营力量”，拼多多如何释放“超规模”民企价值？</strong><div class="tags">公司观察</div><div class="ai-link">AI 摘要 · 名词解读 ›</div></div></a>
+<a class="story" href="#bonds"><div class="thumb tower">政策</div><div><strong>财政部：决定开展2026年11月份国债做市支持操作</strong><div class="tags">政策速递</div><div class="ai-link">AI 摘要 · 名词解读 ›</div></div></a>
+</div>
+<div id="reader" hidden>
+<nav class="top" aria-label="文章导航"><a href="#home" aria-label="返回头条">‹</a><span>财经杂志</span><small>交互原型</small></nav>
+<main>
+<h1>工信部相关负责人就《关于推动汽车企业规范供应商账款支付 优化账期管理的通知》答记者问</h1>
+<button class="audio" id="audio"><b aria-hidden="true">▶</b><span>朗读演示正文</span></button>
+<div class="meta">来源｜工信部官网　·　APP 截图显示 2026年11月16日 18:19<br>工信部原文发布于 2026年9月7日</div>
+<section id="quick" aria-label="AI 快速摘要">
+<details class="ai" open><summary><span>AI</span> 快速摘要</summary>
+<ul><li>两部门发文规范车企向供应商付款，明确账期如何起算、如何验收，以及何时和怎样付款。</li><li>针对中小企业供应商货款，文件鼓励车企在 30 天内付清，最长在 60 天内完成。</li><li>落实情况拟通过企业自查、第三方评估公示和政府督导核查跟进。</li></ul>
+<footer>摘要示例，依据工信部答记者问。 <a href="https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2026/art_17513333f77d471da3e483464ba697c1.html" target="_blank" rel="noopener">核对原文 ↗</a></footer>
+</details>
+</section>
+<section id="article" class="prose" aria-label="演示正文">
+<p class="note">演示改写 · 点击有下划线的名词</p>
+<p>近日，工业和信息化部、市场监管总局联合印发《关于推动汽车企业规范供应商账款支付 优化<button class="term" data-term="period">账期管理</button>的通知》（工信厅联通装函〔2026〕424号）。工业和信息化部相关负责人就《通知》有关内容回答了记者提问。以下围绕读者关心的几个问题，对文件背景和主要内容作通俗梳理。</p>
+<h2>为什么要关注车企付款账期？</h2>
+<p>一辆汽车从零部件生产到整车销售，涉及许多不同规模的供应商。供应商通常先采购原料、安排生产、支付工资，交货后再等待回款。等得越久，企业要垫付的资金就越多。对中小供应商来说，即使订单数量没有减少，资金周转也可能影响后续采购和排产。规范账期，首先是为了让供货方能更准确地预估什么时候收到钱。</p>
+<p>过去，部分车企已公开作出缩短账期的承诺。但判断承诺有没有兑现，需要看一笔订单从交货到资金到账经历了哪些环节。合同上写了付款期限，如果交货与验收之间拖得很久，供应商实际等候的时间仍会拉长。文件因此把起算、验收、支付方式等环节放在一起讨论。</p>
+<h2>账期从什么时候开始算？</h2>
+<p>按答问的一般说明，账期自供应商交付货物、工程或服务并<button class="term" data-term="accept">验收</button>合格之日起计算。车企收到货物之后，应在合理期限内完成验收。一般零部件等生产性物料，应在三个工作日内完成验收。确需装车验证的零部件，答问给出的时限是五个工作日。</p>
+<p>举个例子，一家零部件企业按订单把货送到工厂，随后由车企检查数量、规格和质量。供应商关心的是货什么时候被确认合格，以及约定的付款期限从哪天算。对于每月供货两次及以上的供应商，文件还考虑了连续供货的实际，提出用连续供货周期的中点到实际付款这段时间衡量是否超过账期上限。</p>
+<h2>到了付款日，怎样才算付了款？</h2>
+<p>除了期限，付款方式也影响供应商什么时候能动用这笔钱。答问提到，支付时间一般以<button class="term" data-term="cash">现汇支付</button>的时间为准。文件鼓励使用现金支付，也要求车企避免强迫或变相强迫供应商接受汇票、供应链票据等非现金形式。使用这类方式时，还要对比例、贴现成本由谁承担作出相应安排。</p>
+<p>举例来说，如果供应商拿到一张几个月后才到期的票据，却急需在本周支付原材料款，它可能需要提前贴现。能不能提前拿到钱、要承担多少费用，会直接影响这笔订单的实际回款体验。读这部分时，可以把合同里的付款期限、支付方式和实际到账时间放在一起看。</p>
+<h2>价格还没谈妥，供应商能先拿到钱吗？</h2>
+<p>汽车零部件供货可能跨越几个生产周期，价格谈判也可能发生在供货已经开始之后。文件提出了议价期间先行支付的安排。对于连续性供货，可以参考最近一次合同价，先付一定比例的款项。非连续性供货也可参照适用的价格基准先行支付，待最终价格确定后再多退少补。</p>
+<p>这一安排主要处理的是谈价和付款的时间差。对供应商而言，先收到一部分款项，有助于安排下一批原料采购。对车企而言，先把无争议或可以按基准估算的部分付出去，后续仍可按双方议定的价格结算。这里的情境用于说明机制，具体适用条件和比例可点开官方答问核对。</p>
+<h2>对中小企业供应商有哪些针对性安排？</h2>
+<p>针对汽车企业向中小企业供应商支付货款，答问提出鼓励在三十天内付清，最长在六十天内完成。支付方式也有针对性要求。文件鼓励使用现金，合同没有明确支付方式时，要求按相应规定使用现金支付。阅读有关天数时，可以先确认描述的是哪类供应商、哪种款项，以及适用的起算口径。</p>
+<h2>之后怎么看这些要求有没有落实？</h2>
+<p>工信部答问介绍了企业自查报告、第三方机构调研评估公示和政府督导核查相结合的安排。车企要定期梳理付款情况，第三方机构可通过调研了解执行进展。供应商实际遇到的拖延验收、支付方式争议等问题，也有助于后续核查定位具体环节。</p>
+<p>对读者来说，可以沿着一笔订单的时间顺序理解这篇报道。先看什么时候交货、什么时候验收，再看应何时付款、实际何时到账。如果想继续了解车企曾经作出哪些账期承诺，或验收和回款之间为何会出现时间差，可以接着看下方的历史报道。</p>
+</section>
+<section id="terms" aria-label="AI 关键名词"><p class="terms"><button data-term="period">账期管理 ↗</button><button data-term="accept">验收 ↗</button><button data-term="cash">现汇支付 ↗</button></p></section>
+<button id="impact-entry" class="impact-entry" type="button" aria-label="查看完整 AI 影响推理"><h2>AI 影响推理</h2><span class="impact-guide">从本文出发，查看可能的传导路径。</span><span class="impact-preview" id="impact-preview"></span><span class="impact-action">查看完整推理 →</span></button>
+<section id="related" class="related related-entry" aria-labelledby="related-entry-title"><h2 id="related-entry-title">AI 关联阅读</h2><p>结合历史报道，补充本文的政策背景和事件脉络。</p><small id="related-count"></small><button id="open-related" type="button">查看关联阅读 →</button></section>
+<template id="related-reading-template"><h2>AI 关联历史报道</h2><p>两篇《财经》系报道，分别补充验收争议和清欠背景。</p>
+<details class="card" open><summary><small>财经网 · 2026年4月16日</small><strong>主动告别“内卷”！车企账期集体回落！行业竞争格局重构</strong></summary>
+<p><b>为何相关：</b>本篇通知明确了账期起算和验收要求，这篇前序报道展示了两者为何需要配合。</p><p><b>要点：</b>受访供应商指出，交付到验收合格之间的间隔以及内部审批，会影响实际回款时间。报道记录的是受访者反馈。</p>
+<a href="https://industry.caijing.com.cn/20260416/5153863.shtml" target="_blank" rel="noopener">查看原报道 ↗</a></details>
+<details class="card"><summary><small>《财经》封面 · 2026年10月</small><strong>29万亿应收账款，该怎么清欠？</strong></summary>
+<p><b>为何相关：</b>将车企账期放到更广泛的应收账款治理中，补充企业承诺和监督的前情。</p><p><b>要点：</b>报道回顾了 2025 年 6 月 17 家重点车企公开作出供应商支付账期不超过 60 天的承诺，也讨论了跨行业的清欠问题。</p>
+<a href="https://m.caijing.com.cn/article/202610/447667" target="_blank" rel="noopener">查看原报道 ↗</a></details>
+<p class="note">历史报道按截图所示的 APP 展示日期回溯。10 月报道晚于工信部 9 月答问，可作为后续背景阅读。</p>
+</template></main></div></div>
+<nav id="reader-tools" class="bottom" hidden aria-label="快捷操作"><button id="open-assistant" type="button">✦ AI 阅读助手</button><button id="save" aria-pressed="false">☆ 收藏</button></nav>
+<nav class="tabs" aria-label="底部导航"><a href="#home" data-tab="home"><i aria-hidden="true">▤</i>头条</a><button type="button" disabled><i aria-hidden="true">▱</i>杂志</button><button type="button" disabled><i aria-hidden="true">▦</i>投资日历</button><button type="button" disabled><i aria-hidden="true">◎</i>财经号</button><button type="button" disabled><i aria-hidden="true">▷</i>视频</button></nav><div class="status" role="status"></div>
+<dialog id="definition" aria-labelledby="term-title"><header><span>AI 关键名词 · 模拟演示</span><form method="dialog"><button aria-label="关闭名词卡">关闭</button></form></header><h2 id="term-title"></h2><p id="meaning"></p><p><b>本文怎么理解</b><br><span id="context"></span></p><a href="https://wap.miit.gov.cn/jgsj/zbys/wjfb/art/2026/art_6043f55908f44a71a3e51236f663356b.html" target="_blank" rel="noopener">查看《通知》原文 ↗</a></dialog>
+<dialog id="assistant" aria-labelledby="assistant-label"><div class="sheet"><header class="sheet-head"><i class="sheet-handle" aria-hidden="true"></i><div class="sheet-title"><button id="assistant-back" type="button" aria-label="返回文章">‹ 返回</button><div><b id="assistant-label">AI 阅读助手</b><small id="assistant-article-title"></small></div><button id="assistant-close" type="button" aria-label="关闭 AI 阅读助手">关闭</button></div></header><nav class="assistant-tabs" aria-label="AI 助手功能"><button type="button" data-assistant-tab="understand" aria-selected="true">理解本文</button><button type="button" data-assistant-tab="related" aria-selected="false">关联阅读</button><button type="button" data-assistant-tab="impact" aria-selected="false">影响推理</button></nav><div class="assistant-body"><section class="assistant-panel" data-panel="understand"><h3>问问这篇文章</h3><p class="demo-note">AI 模拟演示 · 回答来自本文预置数据，非实时生成</p><div id="assistant-suggestions" class="suggestions"></div><div id="assistant-chat" class="chat" aria-live="polite"></div><form id="assistant-form" class="ask-form"><input id="assistant-input" type="text" autocomplete="off" placeholder="输入与本文相关的问题" aria-label="输入与本文相关的问题"><button type="submit">提问</button></form></section><section class="assistant-panel assistant-related" data-panel="related" hidden></section><section class="assistant-panel assistant-impact" data-panel="impact" hidden><h3>影响推理</h3><p class="demo-note">AI 模拟演示 · 基于既定情景的辅助推理，非确定性预测</p><div class="ai"><div class="interest"><label for="interest-profile">兴趣方向</label><select id="interest-profile"><option value="industry">产业供应链</option><option value="business">企业经营与就业</option><option value="market">宏观与债券</option></select></div><p class="note" id="impact-input"></p><div class="impact-result" aria-live="polite"><p><b>可能的影响</b><br><span id="impact-chain"></span></p><p><b>成立条件</b><br><span id="impact-condition"></span></p><p><b>后续关注指标</b><br><span id="impact-signal"></span></p></div><footer class="demo-note">本模块仅用于理解新闻，不构成投资建议。</footer></div></section></div></div></dialog>
+<script>
+const terms={
+period:["账期管理","在这篇文章中，账期指供应商收款前的约定付款期限。","一般从交付并验收合格之日起算。连续供货有专门安排，判断实际回款时间时，也要看验收环节。"],
+accept:["验收","车企确认收到的货物、工程或服务符合约定的环节。","通知对一般生产性物料和确需装车验证的零部件分别规定了验收时限。验收完成时间与账期起算相关。"],
+cash:["现汇支付","用转账等方式直接支付资金。","答问说明支付时间一般以现汇时间为准，并单独说明了使用汇票等非现金方式时的要求。"]
+};
+const modal=document.querySelector("#definition");
+document.querySelector("#reader").addEventListener("click",event=>{
+const button=event.target.closest("[data-term]");
+if(!button)return;
+const [title,meaning,context]=activeTerms[button.dataset.term];
+document.querySelector("#term-title").textContent=title;
+document.querySelector("#meaning").textContent=meaning;
+document.querySelector("#context").textContent=context;
+modal.showModal();
+});
+modal.addEventListener("click",event=>{if(event.target===modal){const box=modal.getBoundingClientRect();if(event.clientY<box.top||event.clientY>box.bottom||event.clientX<box.left||event.clientX>box.right)modal.close();}});
+const save=document.querySelector("#save");
+let saved=false;
+function updateSave(){save.textContent=saved?"★ 已收藏":"☆ 收藏";save.setAttribute("aria-pressed",String(saved));}
+updateSave();
+save.onclick=()=>{saved=!saved;updateSave();bookmarks.set(activeArticle,saved);try{localStorage.setItem(bookmarkKey(),saved?"yes":"no");}catch{}refreshImpact();};
+const audio=document.querySelector("#audio");
+const status=document.querySelector(".status");
+let reading=false;
+function resetAudio(){reading=false;audio.querySelector("b").textContent="▶";audio.querySelector("span").textContent="朗读演示正文";}
+audio.onclick=()=>{
+if(!("speechSynthesis" in window)){status.textContent="当前浏览器不支持朗读";return;}
+if(reading){speechSynthesis.cancel();resetAudio();return;}
+const excerpt=Array.from(document.querySelectorAll("#article p:not(.note)"),p=>p.textContent).join("。");
+const utterance=new SpeechSynthesisUtterance(excerpt);
+utterance.lang="zh-CN";utterance.rate=.9;
+utterance.onend=resetAudio;
+utterance.onerror=event=>{resetAudio();if(!["canceled","interrupted"].includes(event.error))status.textContent="朗读暂不可用";};
+reading=true;status.textContent="";audio.querySelector("b").textContent="■";audio.querySelector("span").textContent="停止朗读";
+speechSynthesis.speak(utterance);
+};
+const articles={"xiongan":{"title":"专家解读雄安发展的“民营力量”，拼多多如何释放“超规模”民企价值？","meta":"演示改写｜参考中国青年网<br>2026年11月16日","quick":"<details class=\"ai\" open><summary><span>AI</span> 快速摘要</summary><ul><li>报道以民营经济助力雄安发展指数为背景，观察民企在产业培育、数字服务和就业中的作用。</li><li>拼多多案例的观察重点，是平台在当地设置了哪些业务和岗位，以及这些能力能否服务更多本地商家。</li><li>指数反映多项指标的综合变化。要判断单家企业的长期贡献，还需要跟踪岗位、商家参与和经营表现。</li></ul><footer>预置摘要示例 · <a href=\"https://d.youth.cn/shrgch/202611/t20261116_16968894.htm\" target=\"_blank\" rel=\"noopener\">查看报道 ↗</a></footer></details>","article":"<p class=\"note\">演示改写 · 点击有下划线的名词</p><h2>从新区建设看到民企参与</h2><p>雄安新区的发展通常与承接疏解、基础设施建设和央企项目联系在一起。这篇报道换了一个观察角度，关注民营企业怎样参与产业培育、技术服务和就业。对读者来说，真正需要回答的问题是，企业落地之后，哪些业务开始运转，又给谁增加了机会。</p><p>报道引用的<button class=\"term\" data-term=\"index\">综合指数</button>把民企参与新区发展的多个方面放在一起观察。以2021年作为比较基准，后续变化可以帮助读者把握总体趋势。进一步解释增长来源时，还应查看数字经济、产业升级和就业等分项表现，以及报告怎样选择和统计指标。</p><h2>平台企业的影响从哪里来</h2><p>拼多多是文章用来讨论<button class=\"term\" data-term=\"platform\">平台经济</button>的例子。理解这一案例，可以先区分企业直接带来的本地岗位，以及它通过商家服务、数字工具和交易网络可能带动的间接影响。前者可以跟踪岗位数量与类型，后者则要观察本地企业是否使用这些服务，以及使用后的经营变化。</p><p>例如，一家本地商家如果接入电商平台，可能获得新的销售渠道。能否形成稳定订单，还取决于选品、库存、配送和售后能力。平台提供的培训或数据工具能够帮忙解决其中部分环节，商家的实际效果仍要观察。这是理解<button class=\"term\" data-term=\"fusion\">数实融合</button>的一种具体方式。</p><p>“超规模”可以理解为报道提出的观察视角。企业自身在当地的员工和业务是一部分，周围是否出现更多合作商家、更成熟的服务流程和可持续的人才供给，是另一部分。两个方面需要不同的指标，能够互相补充。</p><h2>接下来可以跟踪什么</h2><p>如果要判断平台与新区的合作是否持续，可以看三类信号。第一是岗位的稳定性和技能结构，包括本地招聘与培养。第二是商家的真实使用情况，包括接入后是否持续经营。第三是企业间的协作，如物流、软件服务和培训机构是否围绕这些业务建立长期合作。</p><p>还可以把几个时点放在一起阅读。先了解新区已经有哪些数字贸易和跨境电商基础，再看平台落地后的用工和业务变化。这样更容易理解哪些条件早已具备，哪些变化需要在后续报道中进一步确认。</p>","terms":"<p class=\"terms\"><button data-term=\"index\">综合指数 ↗</button><button data-term=\"platform\">平台经济 ↗</button><button data-term=\"fusion\">数实融合 ↗</button></p>","related":"<h2>AI 关联历史报道</h2><p>按发布时间回溯，查看相关背景与出处。</p><details class=\"card\" open><summary><small>中国雄安官网 · 2025年2月</small><strong>省级认定，雄安+2</strong></summary><p><b>为何相关：</b>补充平台案例出现前，当地跨境电商已有的基础。</p><p><b>要点：</b>报道介绍白洋淀产业园和新区一家外贸综合服务企业获得省级认定。</p><a href=\"https://www.xiongan.gov.cn/20250219/346e6530b4804f538e2db7231e534ab7/c.html\" target=\"_blank\" rel=\"noopener\">查看原文 ↗</a></details><details class=\"card\"><summary><small>中国雄安官网 · 2026年11月13日</small><strong>民营经济成为雄安新区发展强劲引擎</strong></summary><p><b>为何相关：</b>补充同一议题的就业维度和企业用工案例。</p><p><b>要点：</b>报道从参保及招聘情况切入，展示平台落地如何在当地形成运营类岗位。</p><a href=\"https://www.xiongan.gov.cn/20261113/746975d8b80749ffb378ce4350382054/c.html\" target=\"_blank\" rel=\"noopener\">查看原文 ↗</a></details>","dictionary":{"index":["综合指数","把多个维度按一定方法合成为一个指标，便于比较变化。","报道引用的指数以2021年为基期。指数点位用于比较相对变化，不能直接当作产值、就业人数或单家企业的贡献。"],"platform":["平台经济","通过数字平台连接商家、用户及物流等服务方的经营方式。","看一家平台企业在雄安的影响，可以从本地岗位、商家接入和服务能力三个角度观察。"],"fusion":["数实融合","数字技术或服务进入生产、销售、履约等线下业务环节。","本文可从商家使用数字化工具、对接线上订单和组织履约等场景理解。实际效果需要经营数据验证。"]},"url":"https://d.youth.cn/shrgch/202611/t20261116_16968894.htm"},"bonds":{"title":"财政部：决定开展2026年11月份国债做市支持操作","meta":"演示改写｜参考第一财经消息、财政部往期资料<br>2026年11月16日","quick":"<details class=\"ai\" open><summary><span>AI</span> 快速摘要</summary><ul><li>财政部本次操作旨在支持国债做市，改善二级市场流动性。</li><li>本次安排涉及随卖。读通知时，可以按券种、机构缴款及合并上市的顺序理解。</li><li>公告说明的是操作安排。判断实际效果还要看相关券种后续的成交和报价。</li></ul><footer>预置摘要示例 · <a href=\"https://www.yicai.com/brief/103442106.html\" target=\"_blank\" rel=\"noopener\">查看报道 ↗</a></footer></details>","article":"<p class=\"note\">演示改写 · 点击有下划线的名词</p><h2>这次操作想解决什么问题</h2><p>财政部发布消息，决定开展2026年11月份国债做市支持操作。公告的目的，是支持<button class=\"term\" data-term=\"market\">国债做市</button>、改善二级市场的流动性，并健全反映市场供求关系的<button class=\"term\" data-term=\"curve\">国债收益率曲线</button>。对日常读者而言，可以从一个问题入手：持有某只国债的人想交易时，市场上能否找到合适的报价和交易对手。</p><p>国债发行以后，会在二级市场流通。不同期限、不同批次的券种，活跃程度可能不同。做市机构持续提供买卖报价，有助于交易双方发现价格。如果某只券短期可用供给偏少，做市机构手中能用于交易的券量也会影响它提供报价的能力。</p><h2>从通知中读懂随卖安排</h2><p>本次安排涉及<button class=\"term\" data-term=\"sale\">随卖</button>。财政部向参与机构提供当期指定券种，经相关流程后可与同期国债合并上市交易。阅读通知时，可以先看它涉及哪几只券，再按顺序确认申报、缴款与上市时间。这几个日期分别对应不同环节。</p><p>可以用一个简化例子理解。假设市场上多家机构希望买入某批国债，愿意卖出的数量却偏少。随卖可以为相关券种补充可交易供给。供给增加之后，交易是否变得便利，还要结合当时的买卖需求和机构报价来判断。</p><p>这类安排具有券种范围。公告能告诉读者这一次针对哪些券做了什么，市场表现则需要后续数据来观察。即使同一天里多个期限的收益率都有变化，也需要结合资金价格、其他债券供给和市场预期看原因。</p><h2>为什么公告提到收益率曲线</h2><p>不同期限的国债形成一组利率参照。政府部门、市场机构和研究人员可以用这些价格信息观察期限之间的差异。曲线上的某个点只有在交易和报价足够有代表性时，才适合用来理解该期限的市场供需。</p><p>如果想跟踪政策效果，可先看参与操作券种后续的报价与成交，再与相近期限的其他活跃券对比。可以关注成交频次、买卖报价间的差距，以及操作前后流通变化。单看某一天的收益率涨跌，很难说明整个变化来自哪项操作。</p><p>下方资料提供了两个对照。较早的答问解释随买和随卖的适用背景，往期操作公告可以用来对照这类通知的结构。读者可以先弄清机制，再用同一套顺序阅读本期安排。</p>","terms":"<p class=\"terms\"><button data-term=\"market\">国债做市 ↗</button><button data-term=\"sale\">随卖 ↗</button><button data-term=\"curve\">国债收益率曲线 ↗</button></p>","related":"<h2>AI 关联历史报道</h2><p>按发布时间回溯，查看相关背景与出处。</p><details class=\"card\" open><summary><small>财政部 · 2016年11月</small><strong>建立国债做市支持机制有关问题答记者问</strong></summary><p><b>为何相关：</b>解释这次公告所使用的随卖机制。</p><p><b>要点：</b>答问说明随买、随卖对应的市场情形，以及这些工具怎样支持做市。</p><a href=\"https://m.mof.gov.cn/zcjd/201611/t20161125_2466992.htm\" target=\"_blank\" rel=\"noopener\">查看原文 ↗</a></details><details class=\"card\"><summary><small>财政部 · 2025年12月</small><strong>关于开展2025年12月份国债做市支持操作有关事宜的通知</strong></summary><p><b>为何相关：</b>提供一份往期操作公告，可对照每期变化。</p><p><b>要点：</b>往期通知同样列明券种和操作流程，可与本期的具体日期、券种和安排分别比较。</p><a href=\"https://zwgls.mof.gov.cn/ywgg/202512/t20251215_3979151.htm\" target=\"_blank\" rel=\"noopener\">查看原文 ↗</a></details>","dictionary":{"market":["国债做市","做市商就相关国债向市场提供买入、卖出报价。","本次操作支持做市商开展交易服务。理解公告可以先看它怎样影响特定券种的可交易数量。"],"sale":["随卖","国债做市支持机制下，财政部在二级市场卖出国债的操作。","可以把它理解为向市场补充指定券种的可交易供给。实际的券种和操作安排以通知为准。"],"curve":["国债收益率曲线","把不同到期期限的国债收益率放在一起形成的曲线。","报价和成交更充分时，相关期限的价格更有机会反映市场供求。"]},"url":"https://www.yicai.com/brief/103442106.html"}};
+const articleElements={
+title:document.querySelector("#reader h1"),
+meta:document.querySelector("#reader .meta"),
+quick:document.querySelector("#quick"),
+article:document.querySelector("#article"),
+terms:document.querySelector("#terms")
+};
+const sourceLink=modal.querySelector("a");
+const original=Object.fromEntries(Object.entries(articleElements).map(([key,element])=>[key,element.innerHTML]));
+original.related=document.querySelector("#related-reading-template").innerHTML;
+original.dictionary=terms;
+original.url=sourceLink.href;
+original.sourceLabel=sourceLink.textContent;
+let activeArticle="";
+let activeTerms=terms;
+let activeRelatedHtml=original.related;
+let headlineScroll=0;
+let inReader=false;
+const bookmarks=new Map();
+const profiles={"industry":"产业供应链","business":"企业经营与就业","market":"宏观与债券"};
+const articleTopics={"reading":"industry","xiongan":"business","bonds":"market"};
+const impactRules={"reading":{"industry":["付款和验收流程更可预期 → 供应商的实际回款周期可能缩短 → 垫资压力可能下降。","车企按约定完成验收和支付，实际等待时间随之减少。","从交付到资金到账的天数、逾期率。"],"business":["回款更稳定 → 供应商更容易安排采购和工资 → 排产与用工波动可能减小。","回款改善持续，且订单需求没有明显减少。","现金周转、生产排期、用工变化。"],"market":["应收款更快回笼 → 部分供应商短期融资需求可能下降。","改善覆盖较多企业，且实际到账更快。由单篇报道无法判断整体融资环境变化。","行业应收周转、短期借款变化。"]},"xiongan":{"industry":["平台服务接入 → 本地商家可能增加销售渠道 → 仓储和履约服务需求可能增加。","商家能够持续经营，新增订单能稳定履约。","活跃商家、复购、订单履约表现。"],"business":["平台在当地设置运营岗位 → 本地数字运营人才可能增加 → 配套服务团队可能随之形成。","岗位持续开放，人才培养和业务规模能够延续。","岗位留存、招聘结构、配套企业参与。"],"market":["数字服务与产业活动若持续扩张 → 可能逐步反映在区域经营和就业指标中。","需要更多企业及更长周期的数据，才能判断变化范围。","区域就业、企业经营及后续分项指标。"]},"bonds":{"industry":["关键期限报价若更充分 → 企业观察融资环境时可能获得更清晰的利率参照。","相关期限的市场交易持续活跃。企业融资成本还取决于信用与市场条件。","同期限国债与企业债报价差异。"],"business":["部分券种交易若更顺畅 → 有相关配置的企业财资团队可能更容易执行交易计划。","持有或计划交易的券种受影响，成交深度确有改善。","目标券种成交、报价差与交易成本。"],"market":["随卖补充指定券种供给 → 做市商可交易券量可能增加 → 报价和交易可能更顺畅。","新增供给能满足交易需求，且参与机构持续提供报价。","目标券种成交频次、买卖报价差及相近期限表现。"]}};
+const impactFacts={
+reading:{
+industry:"《通知》将账期起算与验收挂钩：一般生产性物料应在三个工作日内完成验收，确需装车验证的零部件为五个工作日。",
+business:"针对中小企业供应商货款，答问提出鼓励三十天内付清，最长在六十天内完成；议价期间可按基准先行支付。",
+market:"答问明确支付时间一般以现汇支付时间为准，并要求避免强迫或变相强迫供应商接受非现金支付。"
+},
+xiongan:{
+industry:"报道将平台服务、本地商家使用数字工具以及交易网络作为观察民企参与雄安发展的维度。",
+business:"报道关注平台企业在当地设置的业务和岗位，并将本地招聘与人才培养列为后续观察信号。",
+market:"报道引用以2021年为比较基期的综合指数，用于观察民营企业参与新区发展的多项指标变化。"
+},
+bonds:{
+industry:"财政部公告明确，本次操作用于支持国债做市、改善二级市场流动性，并健全反映市场供求的国债收益率曲线。",
+business:"本次安排涉及随卖：财政部向参与机构提供指定券种，完成相关流程后可与同期国债合并上市交易。",
+market:"本次操作通过随卖向市场补充指定国债券种的可交易供给。"
+}
+};
+const qaBank={
+reading:{source:["工业和信息化部答记者问","https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2026/art_17513333f77d471da3e483464ba697c1.html"],answers:[
+{q:"这篇文章的核心观点是什么？",keys:["核心","观点","主要内容","讲了什么"],fact:"通知把车企向供应商付款的账期起算、验收和支付方式放在同一套规则中规范，并对中小企业供应商给出针对性安排。",analysis:"关键不只是“60天”，而是减少验收拖延、非现金支付等环节对实际回款时间的影响。"},
+{q:"为什么会发生这件事？",keys:["为什么","原因","背景"],fact:"供应商在交货后仍可能因验收、审批和支付方式继续承担资金占用，过去仅有账期承诺不足以完整反映实际等待时间。",analysis:"因此政策将治理范围从合同中的天数扩展到完整付款链路。"},
+{q:"可能产生哪些影响？",keys:["影响","结果","后果"],fact:"政策要求主要针对账期起算、验收时限和支付安排。",analysis:"推测：如果要求被持续执行，供应商的回款可预期性可能提高，但实际效果还需用到账天数和逾期率验证。"}]},
+xiongan:{source:["中国青年网相关报道","https://d.youth.cn/shrgch/202611/t20261116_16968894.htm"],answers:[
+{q:"这篇文章的核心观点是什么？",keys:["核心","观点","主要内容","讲了什么"],fact:"报道从产业培育、数字服务和就业角度观察民营企业参与雄安发展，并以平台企业为案例。",analysis:"评估“超规模”价值不能只看单家企业的岗位，还要追踪商家接入、履约服务和人才培养是否持续。"},
+{q:"为什么会发生这件事？",keys:["为什么","原因","背景"],fact:"雄安的产业和数字贸易基础为平台企业设置业务、岗位及商家服务提供了条件。",analysis:"报道试图用综合指数和具体企业案例，解释民企参与新区建设的方式。"},
+{q:"可能产生哪些影响？",keys:["影响","结果","后果"],fact:"报道关注了平台业务、本地岗位和商家服务。",analysis:"推测：如果业务和商家参与能够持续，可能带动数字运营岗位及仓储、履约等配套需求；这需要后续数据验证。"}]},
+bonds:{source:["第一财经相关简讯","https://www.yicai.com/brief/103442106.html"],answers:[
+{q:"这篇文章的核心观点是什么？",keys:["核心","观点","主要内容","讲了什么"],fact:"财政部通过国债做市支持操作为指定券种补充可交易供给，目标是改善二级市场流动性。",analysis:"理解这类公告应区分“操作安排”和“实际效果”，后者需要交易数据验证。"},
+{q:"为什么会发生这件事？",keys:["为什么","原因","背景"],fact:"不同期限和批次的国债活跃度可能不同，做市机构持有的可交易券量会影响其提供报价的能力。",analysis:"随卖可用于补充特定券种供给，以支持做市机构开展交易服务。"},
+{q:"可能产生哪些影响？",keys:["影响","结果","后果"],fact:"本次操作向市场补充指定国债券种的供给。",analysis:"推测：如果新增供给与交易需求匹配，报价和成交可能更顺畅；需用成交频次、买卖价差等指标进一步验证。"}]}
+};
+const interestPicker=document.querySelector("#interest-profile");
+const impactFactRow=document.createElement("p");
+impactFactRow.innerHTML='<b>事实依据</b><br><span id="impact-fact"></span>';
+document.querySelector(".impact-result").prepend(impactFactRow);
+let hasManualInterest=false;
+try{const stored=localStorage.getItem("caijing-interest");if(stored&&profiles[stored]){interestPicker.value=stored;hasManualInterest=true;}}catch{}
+function bookmarkKey(key=activeArticle){return key==="reading"?"caijing-prototype-save":"caijing-prototype-save-"+key;}
+function isBookmarked(key){
+if(bookmarks.has(key))return bookmarks.get(key);
+try{return localStorage.getItem(bookmarkKey(key))==="yes";}catch{return false;}
+}
+function refreshImpact(){
+const topic=interestPicker.value||articleTopics[activeArticle];
+document.querySelector("#impact-input").textContent="当前兴趣方向："+profiles[topic];
+document.querySelector("#impact-fact").textContent=impactFacts[activeArticle][topic];
+const result=impactRules[activeArticle][topic];
+for(const [index,id] of ["impact-chain","impact-condition","impact-signal"].entries()){
+document.getElementById(id).textContent=result[index];
+}
+}
+function refreshImpactPreview(){
+const topic=articleTopics[activeArticle];
+document.querySelector("#impact-preview").textContent=impactRules[activeArticle][topic][0];
+}
+interestPicker.addEventListener("change",()=>{
+hasManualInterest=true;
+try{localStorage.setItem("caijing-interest",interestPicker.value);}catch{}
+refreshImpact();
+});
+const assistantDialog=document.querySelector("#assistant");
+const assistantTitle=document.querySelector("#assistant-article-title");
+const assistantSuggestions=document.querySelector("#assistant-suggestions");
+const assistantChat=document.querySelector("#assistant-chat");
+const assistantForm=document.querySelector("#assistant-form");
+const assistantInput=document.querySelector("#assistant-input");
+const assistantBody=document.querySelector(".assistant-body");
+const impactTab=document.querySelector('[data-assistant-tab="impact"]');
+const relatedTab=document.querySelector('[data-assistant-tab="related"]');
+document.querySelector(".assistant-tabs").insertBefore(impactTab,relatedTab);
+assistantBody.insertBefore(document.querySelector('[data-panel="impact"]'),document.querySelector('[data-panel="related"]'));
+function enhanceQuickSummary(){
+const details=document.querySelector("#quick .ai");
+if(!details)return;
+const list=details.querySelector("ul");
+const footer=details.querySelector("footer");
+const first=list?.querySelector("li")?.textContent??"";
+const detailList=list?.cloneNode(true);
+detailList?.querySelector("li")?.remove();
+const wrap=document.createElement("div");
+wrap.className="ai";
+wrap.innerHTML='<div class="summary-heading"><span>AI</span> 快速摘要</div><p class="demo-note">AI 模拟演示 · 预置摘要，非实时生成</p><p class="summary-core"><b>一句话概括：</b>'+first+'</p><details class="summary-points"><summary>展开核心要点</summary>'+(detailList?.outerHTML??"")+(footer?.outerHTML??"")+'</details>';
+document.querySelector("#quick").replaceChildren(wrap);
+}
+function renderRelatedEntry(){
+const template=document.createElement("template");
+template.innerHTML=activeRelatedHtml;
+const count=template.content.querySelectorAll(".card").length;
+document.querySelector("#related-count").textContent="AI 模拟演示 · 已找到 "+count+" 篇相关报道";
+}
+function switchAssistantTab(name){
+document.querySelectorAll("[data-assistant-tab]").forEach(button=>button.setAttribute("aria-selected",String(button.dataset.assistantTab===name)));
+document.querySelectorAll("[data-panel]").forEach(panel=>panel.hidden=panel.dataset.panel!==name);
+assistantBody.scrollTop=0;
+}
+function resetAssistantConversation(){
+assistantChat.replaceChildren();
+assistantInput.value="";
+assistantTitle.textContent=articleElements.title.textContent;
+const bank=qaBank[activeArticle];
+assistantSuggestions.replaceChildren(...bank.answers.map((answer,index)=>{
+const button=document.createElement("button");
+button.type="button";
+button.dataset.questionIndex=String(index);
+button.textContent=answer.q;
+return button;
+}));
+const relatedPanel=document.querySelector('[data-panel="related"]');
+relatedPanel.innerHTML=activeRelatedHtml;
+const relatedNote=document.createElement("p");
+relatedNote.className="demo-note";
+relatedNote.textContent="AI 模拟演示 · 历史报道用于补充背景，不作为当前事件的直接证据";
+relatedPanel.querySelector("h2")?.after(relatedNote);
+if(!hasManualInterest)interestPicker.value=articleTopics[activeArticle];
+}
+function findPresetAnswer(question){
+const normalized=question.trim().replace(/[\s，。？?!]/g,"");
+return qaBank[activeArticle].answers.find(answer=>answer.q.replace(/[\s，。？?!]/g,"")===normalized)||
+qaBank[activeArticle].answers.find(answer=>answer.keys.some(key=>normalized.includes(key)));
+}
+function appendAnswer(question,preset){
+const user=document.createElement("p");
+user.className="bubble user";
+user.textContent=question;
+assistantChat.append(user);
+const answer=document.createElement("article");
+answer.className="bubble answer";
+if(!preset){
+answer.innerHTML='<h4>AI 模拟演示</h4><p>当前为演示版本，暂不支持该问题。请尝试上方推荐问题，或询问本文的核心观点、事件背景或可能影响。</p>';
+}else{
+const [sourceName,sourceUrl]=qaBank[activeArticle].source;
+answer.innerHTML='<h4>AI 模拟演示</h4><p><b>事实依据</b><br>'+preset.fact+'</p><p><b>分析判断</b><br>'+preset.analysis+'</p><p class="evidence">来源：<a href="'+sourceUrl+'" target="_blank" rel="noopener">'+sourceName+' ↗</a></p>';
+}
+assistantChat.append(answer);
+requestAnimationFrame(()=>assistantBody.scrollTo({top:assistantBody.scrollHeight,behavior:"smooth"}));
+}
+function openAssistant(tabName="understand"){
+switchAssistantTab(tabName);
+assistantDialog.showModal();
+document.documentElement.classList.add("sheet-open");
+}
+function closeAssistant(){
+if(assistantDialog.open)assistantDialog.close();
+}
+document.querySelector("#open-assistant").addEventListener("click",()=>openAssistant());
+document.querySelector("#impact-entry").addEventListener("click",()=>openAssistant("impact"));
+document.querySelector("#open-related").addEventListener("click",()=>openAssistant("related"));
+document.querySelector("#assistant-close").addEventListener("click",closeAssistant);
+assistantDialog.addEventListener("close",()=>document.documentElement.classList.remove("sheet-open"));
+assistantDialog.addEventListener("click",event=>{if(event.target===assistantDialog)closeAssistant();});
+document.querySelectorAll("[data-assistant-tab]").forEach(button=>button.addEventListener("click",()=>switchAssistantTab(button.dataset.assistantTab)));
+assistantSuggestions.addEventListener("click",event=>{
+const button=event.target.closest("[data-question-index]");
+if(!button)return;
+const preset=qaBank[activeArticle].answers[Number(button.dataset.questionIndex)];
+appendAnswer(preset.q,preset);
+});
+assistantForm.addEventListener("submit",event=>{
+event.preventDefault();
+const question=assistantInput.value.trim();
+if(!question){assistantInput.focus();return;}
+assistantInput.value="";
+appendAnswer(question,findPresetAnswer(question));
+});
+function loadArticle(key){
+const page=articles[key]??original;
+for(const [field,element] of Object.entries(articleElements))element.innerHTML=page[field];
+activeArticle=key;
+activeTerms=page.dictionary;
+activeRelatedHtml=page.related;
+sourceLink.href=page.url;
+sourceLink.textContent=page.sourceLabel??"查看报道来源 ↗";
+saved=isBookmarked(key);
+updateSave();
+enhanceQuickSummary();
+renderRelatedEntry();
+resetAssistantConversation();
+refreshImpactPreview();
+refreshImpact();
+}
+function renderScreen(){
+const route=location.hash.slice(1);
+const key=Object.hasOwn(articles,route)?route:
+(["reading","quick","related","terms","article","top"].includes(route)?"reading":"");
+if(!inReader&&key)headlineScroll=window.scrollY;
+if(reading&&key!==activeArticle){speechSynthesis.cancel();resetAudio();}
+if(key&&key!==activeArticle)loadArticle(key);
+const showReader=Boolean(key);
+document.querySelector("#home").hidden=showReader;
+document.querySelector("#reader").hidden=!showReader;
+document.querySelector(".tabs").hidden=showReader;
+document.querySelector("#reader-tools").hidden=!showReader;
+document.querySelector('[data-tab="home"]').setAttribute("aria-current","page");
+if(showReader){
+window.scrollTo(0,0);
+if(route!==key)document.getElementById(route)?.scrollIntoView();
+}else if(inReader){
+closeAssistant();
+window.scrollTo(0,headlineScroll);
+}
+inReader=showReader;
+}
+window.addEventListener("hashchange",renderScreen);
+renderScreen();
+</script>
+</html>
